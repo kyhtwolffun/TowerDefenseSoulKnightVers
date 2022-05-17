@@ -9,11 +9,12 @@ public class WeaponSystem : MonoBehaviour
     
 
     private List<WeaponData> weaponDataList = new List<WeaponData>();
+    public WeaponData GetCurrentWeaponData => weaponDataList[currentWeaponIndex];
     private List<Weapon> weaponList = new List<Weapon>();
     private int currentWeaponIndex;
 
     private Weapon currentWeapon;
-    public bool currentWeaponExistence => currentWeapon;
+    public bool GetCurrentWeaponExistence => currentWeapon;
 
     public bool isThereFreeSlot()
     {
@@ -75,6 +76,25 @@ public class WeaponSystem : MonoBehaviour
         EquipWeapon(false);
     }
 
+    public void DropWeapon()
+    {
+        if (!currentWeapon || weaponList.Count < 1)
+            return;
+        weaponDataList.RemoveAt(currentWeaponIndex);
+        weaponList.RemoveAt(currentWeaponIndex);
+        numberOfAvailableWeaponSlots++;
+        Destroy(currentWeapon.gameObject);
+
+        if (weaponList.Count >= 1)
+        {
+            if (currentWeaponIndex == weaponList.Count)
+            {
+                currentWeaponIndex--;
+            }
+            EquipWeapon(false);
+        }
+    }
+
     private Weapon EquipWeapon(bool newWeapon, bool removeCurrentWeapon = false)
     {
         if (newWeapon)
@@ -88,14 +108,14 @@ public class WeaponSystem : MonoBehaviour
         }
         else
         {
-            currentWeapon.gameObject.SetActive(false);
+            currentWeapon.gameObject?.SetActive(false);
             weaponList[currentWeaponIndex].gameObject.SetActive(true);
             currentWeapon = weaponList[currentWeaponIndex];
             return null;
         }
     }
 
-    private Weapon CreateWeapon (WeaponData weaponData)
+    private Weapon CreateWeapon(WeaponData weaponData)
     {
         Weapon weapon;
         weapon = Instantiate(weaponData.Prefab, gameObject.transform);

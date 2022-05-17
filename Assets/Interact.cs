@@ -13,24 +13,26 @@ public class Interact : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IInteractableBase interactableBase = collision.GetComponent<IInteractableBase>();
-        if (interactableBase != null)
+        IInteractable interactable = collision.GetComponent<IInteractable>();
+        if (interactable != null)
         {
-            switch (interactableBase.GetInteractableType())
+            switch (interactable.GetInteractableType())
             {
 
                 case InteractableType.Collectable:
-                    Collectable collectable = (Collectable)interactableBase;
+                    Collectable collectable = (Collectable)interactable;
                     //Raise UI event
                     switch (collectable.GetCollectableType())
                     {
                         case CollectableType.Weapon:
                             if (!autoInteract && !weaponSystem.isThereFreeSlot())
                             {
+                                //Update UI + register GetWeapon callback 
                                 interactableEvent.Raise(() => weaponSystem.GetWeapon((WeaponData)collectable.Interact(), collectable.OnCompleteInteract));
                             }
                             else
                             {
+                                //Immediately GetWeapon (for monsters) 
                                 weaponSystem.GetWeapon((WeaponData)collectable.Interact(), collectable.OnCompleteInteract);
                                 OutRangeInteractableEvent.Raise();
                             }
@@ -44,14 +46,19 @@ public class Interact : MonoBehaviour
                     }
                     break;
                 case InteractableType.Tower:
-                    Tower tower = (Tower)interactableBase;
+                    Tower tower = (Tower)interactable;
                     //Raise UI event
                     switch (tower.TowerType)
                     {
                         case TowerType.Attack:
-                            if (!autoInteract && weaponSystem.currentWeaponExistence)
+                            if (!autoInteract && weaponSystem.GetCurrentWeaponExistence)
                             {
-
+                                //Update UI + register Place current weapon for interacting tower callback
+                                interactableEvent.Raise(() =>
+                                {
+                                    tower.PlaceWeapon(weaponSystem.GetCurrentWeaponData);
+                                    weaponSystem.DropWeapon();
+                                });
                             }
                                 break;
                         case TowerType.Shield:
@@ -71,8 +78,8 @@ public class Interact : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Reset UI event
-        IInteractableBase interactableBase = collision.GetComponent<IInteractableBase>();
-        if (interactableBase != null)
+        IInteractable interactable = collision.GetComponent<IInteractable>();
+        if (interactable != null)
         {
             OutRangeInteractableEvent.Raise();
         }

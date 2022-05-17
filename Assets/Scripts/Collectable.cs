@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectable : MonoBehaviour, IInteractable<ICollectableData>
+public class Collectable : MonoBehaviour, IInteractable
 {
     [Header("Components")]
     [SerializeField] private SpriteRenderer spriteRenderer;

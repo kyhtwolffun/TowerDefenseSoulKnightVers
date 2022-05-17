@@ -45,15 +45,18 @@ TagManager:
   - name: Environment
     uniqueID: 516844011
     locked: 0
+  - name: Tower
+    uniqueID: 3430705627
+    locked: 0
   - name: MainCharacter
     uniqueID: 2325984979
-    locked: 0
-  - name: Environment-StraightLooking
-    uniqueID: 863729479
     locked: 0
   - name: Weapon
     uniqueID: 1431267745
     locked: 0
   - name: Collectable
     uniqueID: 1488282753
+    locked: 0
+  - name: Environment-StraightLooking
+    uniqueID: 863729479
     locked: 0

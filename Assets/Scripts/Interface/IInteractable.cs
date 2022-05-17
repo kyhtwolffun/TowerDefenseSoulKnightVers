@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public interface IInteractable<T> : IInteractableBase
+public interface IInteractable
 {
-    T Interact();
-    void OnCompleteInteract();
+    InteractableType GetInteractableType();
+}
+
+public enum InteractableType
+{
+    Collectable,
+    Tower
 }

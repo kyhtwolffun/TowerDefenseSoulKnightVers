@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonoBehaviour, IInteractable<WeaponSystem>
+public class Tower : MonoBehaviour, IInteractable
 {
     [Header("Components")]
     [SerializeField] private WeaponSystem weaponSystem;
-    [SerializeField] protected Transform weaponPosition;
+    //[SerializeField] protected Transform weaponPosition;
 
     #region Properties
     [Header("Properties")]
@@ -25,6 +25,10 @@ public class Tower : MonoBehaviour, IInteractable<WeaponSystem>
     {
         StartCoroutine(AttackLoop());
     }
+
+    #region interface implementation
+    public InteractableType GetInteractableType() => InteractableType.Tower;
+    #endregion
 
     private IEnumerator AttackLoop()
     {
@@ -45,20 +49,10 @@ public class Tower : MonoBehaviour, IInteractable<WeaponSystem>
             weaponSystem.Attack();
     }
 
-    public void PlaceWeapon()
+    public void PlaceWeapon(WeaponData weaponData)
     {
-
+        weaponSystem.GetWeapon(weaponData, null);
     }
-
-    public WeaponSystem Interact()
-    {
-        throw new NotImplementedException();
-    }
-    public void OnCompleteInteract()
-    {
-        throw new NotImplementedException();
-    }
-    public InteractableType GetInteractableType() => InteractableType.Tower;
 }
 
 public enum TowerType

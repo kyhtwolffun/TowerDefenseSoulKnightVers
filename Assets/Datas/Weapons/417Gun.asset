@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ffd93e87c8670546a81881bd794800d, type: 3}
+  m_Name: 417Gun
+  m_EditorClassIdentifier: 
+  weaponSprite: {fileID: 4045439354945434234, guid: 3d1034bfc5eea2940b1e8207fa094186, type: 3}
+  weaponType: 1
+  cdr: 0.2
+  prefab: {fileID: 5490474588111918447, guid: e5c9766eb4caae64b84fa2d3002754a2, type: 3}

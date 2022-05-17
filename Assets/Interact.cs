@@ -44,6 +44,23 @@ public class Interact : MonoBehaviour
                     }
                     break;
                 case InteractableType.Tower:
+                    Tower tower = (Tower)interactableBase;
+                    //Raise UI event
+                    switch (tower.TowerType)
+                    {
+                        case TowerType.Attack:
+                            if (!autoInteract && weaponSystem.currentWeaponExistence)
+                            {
+
+                            }
+                                break;
+                        case TowerType.Shield:
+                            break;
+                        case TowerType.Buff:
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 default:
                     break;

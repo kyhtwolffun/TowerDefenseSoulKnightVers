@@ -18,6 +18,7 @@ public class UISystem : MonoBehaviour
     [SerializeField] private NoParamEvent OutRangeInteractableEvent;
 
     private Action onInteractableBtnClickCallback;
+    private bool shootState = true;
 
     private void Awake()
     {
@@ -36,24 +37,36 @@ public class UISystem : MonoBehaviour
 
     #region Interact/Shoot Btn
 
+    //Set UI -> Interactable and register callback
     private void SetupUIInteractable(Action action)
     {
         SetUIShootBtn(true);
         onInteractableBtnClickCallback = action;
     }
 
+    //Set UI for Interact/Shoot Btn, if not interacting -> unregister callback
     private void SetUIShootBtn(bool isInteracting = false)
     {
         if (isInteracting)
+        {
             shootAndInteractBtn.sprite = InteractBtnSprite;
+            shootState = false;
+        }
         else
+        {
             shootAndInteractBtn.sprite = ShootBtnSprite;
+            onInteractableBtnClickCallback = null;
+            shootState = true;
+        }
     }
 
+    //On InteractBtn clicked
     private void OnInteractableBtnClick()
     {
-        SetUIShootBtn();
+        if (shootState)
+            return;
         onInteractableBtnClickCallback?.Invoke();
+        SetUIShootBtn();
     }
 
     #endregion

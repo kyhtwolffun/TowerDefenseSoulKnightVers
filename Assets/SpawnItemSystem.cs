@@ -28,14 +28,7 @@ public class SpawnItemSystem : MonoBehaviour
     {
         for (int i = 0; i < weaponList.Count; i++)
         {
-            if (i == 0)
-            {
-                SpawnItem(weaponList[i], (Vector2)transform.position + Vector2.down * 3);
-            }
-            else
-            {
-                SpawnItem(weaponList[i], transform.position);
-            }
+            SpawnItem(weaponList[i], (Vector2)transform.position + Vector2.right * Random.Range(-5f,5f) + Vector2.up * Random.Range(-5f, 5f));
         }
     }
 

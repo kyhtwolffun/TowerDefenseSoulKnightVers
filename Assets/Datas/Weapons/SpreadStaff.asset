@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ffd93e87c8670546a81881bd794800d, type: 3}
-  m_Name: 417Gun
+  m_Name: SpreadStaff
   m_EditorClassIdentifier: 
-  weaponSprite: {fileID: 4045439354945434234, guid: 3d1034bfc5eea2940b1e8207fa094186, type: 3}
-  weaponType: 1
-  cdr: 0
-  prefab: {fileID: 5490474588111918447, guid: e5c9766eb4caae64b84fa2d3002754a2, type: 3}
-  bulletForce: 20
-  numberOfSpreadBullets: 0
-  angleBetweenBullets: 0
+  weaponSprite: {fileID: -5658928591213479476, guid: 50e90bbb39b4f65499f42e747264b08d, type: 3}
+  weaponType: 2
+  cdr: 1
+  prefab: {fileID: 8384197726332168962, guid: 71a872b74b8d34542858367c9298fdc4, type: 3}
+  bulletForce: 8
+  numberOfSpreadBullets: 5
+  angleBetweenBullets: 15

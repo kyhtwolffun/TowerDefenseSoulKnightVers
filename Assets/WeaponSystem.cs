@@ -46,7 +46,8 @@ public class WeaponSystem : MonoBehaviour
         else
         {
             Weapon weapon = CreateWeapon(weaponData);
-            weapon.gameObject.SetActive(false);
+            //weapon.gameObject.SetActive(false);
+            weapon.Disable();
             weaponList.Add(weapon);
         }
 
@@ -108,8 +109,10 @@ public class WeaponSystem : MonoBehaviour
         }
         else
         {
-            currentWeapon.gameObject?.SetActive(false);
-            weaponList[currentWeaponIndex].gameObject.SetActive(true);
+            //currentWeapon.gameObject?.SetActive(false);
+            currentWeapon?.Disable();
+            //weaponList[currentWeaponIndex].gameObject.SetActive(true);
+            weaponList[currentWeaponIndex].Enable();
             currentWeapon = weaponList[currentWeaponIndex];
             return null;
         }
@@ -119,8 +122,22 @@ public class WeaponSystem : MonoBehaviour
     {
         Weapon weapon;
         weapon = Instantiate(weaponData.Prefab, gameObject.transform);
-        weapon.InitWeaponInfo(weaponData);
-
+        switch (weaponData.WeaponType)
+        {
+            case WeaponType.Melee:
+                weapon.InitWeaponInfo(weaponData);
+                break;
+            case WeaponType.Gun:
+                weapon = (Gun)weapon;
+                weapon.InitWeaponInfo(weaponData);
+                break;
+            case WeaponType.Staff:
+                weapon = (Staff)weapon;
+                weapon.InitWeaponInfo(weaponData);
+                break;
+            default:
+                break;
+        }
         return weapon;
     }
 

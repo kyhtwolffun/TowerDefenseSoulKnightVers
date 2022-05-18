@@ -7,6 +7,8 @@ public class Weapon : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] protected Animator animator;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
+    [SerializeField] protected Collider2D collider2d;
 
     #region Properties
     [Header("Properties")]
@@ -16,11 +18,13 @@ public class Weapon : MonoBehaviour
     #endregion
 
     protected bool isCdrRefreshed = true;
+    protected Transform idleTransform;
 
-    public void InitWeaponInfo(WeaponData weaponData)
+    public virtual void InitWeaponInfo(WeaponData weaponData)
     {
         weaponType = weaponData.WeaponType;
         cdr = weaponData.Cdr;
+        idleTransform = transform;
     }
 
     public virtual void Attack()
@@ -41,10 +45,26 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(cdr);
         isCdrRefreshed = true;
     }
+
+    public virtual void Disable()
+    {
+        spriteRenderer.enabled = false;
+        if (collider2d)
+            collider2d.enabled = false;
+        transform.SetPositionAndRotation(idleTransform.position, idleTransform.rotation);
+    }
+
+    public virtual void Enable()
+    {
+        spriteRenderer.enabled = true;
+        if (collider2d)
+            collider2d.enabled = true;
+    }
 }
 
 public enum WeaponType
 {
     Melee,
-    Range
+    Gun,
+    Staff
 }

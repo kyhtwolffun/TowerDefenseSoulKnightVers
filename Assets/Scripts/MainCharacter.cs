@@ -33,7 +33,7 @@ public class MainCharacter : MonoBehaviour
         animator.SetFloat("Magnitude", movement.sqrMagnitude);
 
         //Input Attack
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
             Attack();
 
         //Input Switch Owned Weapon

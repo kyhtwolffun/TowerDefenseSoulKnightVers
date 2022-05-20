@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3464224424202671758
+--- !u!1 &2798605286079683604
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,59 +8,57 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6181555969020774576}
-  - component: {fileID: 2826995657275904669}
-  - component: {fileID: 7112665122220277648}
-  - component: {fileID: 8895674778906441885}
-  - component: {fileID: 5402832273135768291}
-  - component: {fileID: 5771457715217221368}
+  - component: {fileID: 2798605286079683606}
+  - component: {fileID: 5765368726164706024}
+  - component: {fileID: 2798605286079683601}
+  - component: {fileID: 2798605286079683607}
+  - component: {fileID: 2798605286079683600}
+  - component: {fileID: 8090465212640895198}
   m_Layer: 7
-  m_Name: BumerangBullet
+  m_Name: TwoSpinningBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6181555969020774576
+--- !u!4 &2798605286079683606
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3464224424202671758}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.727, y: 5.289756, z: -8.646671}
+  m_GameObject: {fileID: 2798605286079683604}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1.517, y: 3.646, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2826995657275904669
-Animator:
-  serializedVersion: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &5765368726164706024
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3464224424202671758}
+  m_GameObject: {fileID: 2798605286079683604}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b6e001f447a42a7409c3a7e2993789c2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!212 &7112665122220277648
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47538a91a059344fafddc452e034226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explodeEffect: {fileID: 5603343923179237381, guid: dcba70d7f81fe4e4688a336f637381a6, type: 3}
+  spreadingExplodeDelay: 1
+  spreadingIfHit: 1
+  destroyEffectDelay: 3
+  afterExlodeAttack: {fileID: 11400000, guid: d18669af6dcf1ab4b99fbb45d3a4a53e, type: 2}
+--- !u!212 &2798605286079683601
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3464224424202671758}
+  m_GameObject: {fileID: 2798605286079683604}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -93,52 +91,71 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1431267745
   m_SortingLayer: 4
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -1160437419388215662, guid: 0cd8788195d944e448bec23d10c91580, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 3523596762647737811, guid: 0cd8788195d944e448bec23d10c91580, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.45714286, y: 0.45714286}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8895674778906441885
+--- !u!95 &2798605286079683607
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2798605286079683604}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 03fbb4f21bb719a439f5b16ecdc94599, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &2798605286079683600
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3464224424202671758}
+  m_GameObject: {fileID: 2798605286079683604}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.028375506, y: -0.014130428}
+  m_Offset: {x: -0.056319863, y: -0.0021988153}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.45714286, y: 0.45714286}
-    newSize: {x: 0.45714286, y: 0.45714286}
+    oldSize: {x: 0.9142857, y: 0.9142857}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.34406114, y: 0.37379995}
+  m_Size: {x: 0.5697826, y: 0.45961714}
   m_EdgeRadius: 0
---- !u!50 &5402832273135768291
+--- !u!50 &8090465212640895198
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3464224424202671758}
+  m_GameObject: {fileID: 2798605286079683604}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -152,17 +169,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &5771457715217221368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3464224424202671758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78e26801d0072464eb69671dbca604de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitEffect: {fileID: 7987387094473416056, guid: 6ccd82846825f7847a3230de15dce1e6, type: 3}
-  destroyEffectDelay: 3

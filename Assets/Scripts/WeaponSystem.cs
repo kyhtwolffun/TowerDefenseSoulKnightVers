@@ -6,6 +6,7 @@ using System;
 public class WeaponSystem : MonoBehaviour
 {
     [SerializeField] private int numberOfAvailableWeaponSlots;
+    [SerializeField] private TeamDefine teamDefine;
     
 
     private List<WeaponData> weaponDataList = new List<WeaponData>();
@@ -125,15 +126,15 @@ public class WeaponSystem : MonoBehaviour
         switch (weaponData.WeaponType)
         {
             case WeaponType.Melee:
-                weapon.InitWeaponInfo(weaponData);
+                weapon.InitWeaponInfo(weaponData, teamDefine.Team);
                 break;
             case WeaponType.Gun:
                 weapon = (Gun)weapon;
-                weapon.InitWeaponInfo(weaponData);
+                weapon.InitWeaponInfo(weaponData, teamDefine.Team);
                 break;
             case WeaponType.Staff:
                 weapon = (Staff)weapon;
-                weapon.InitWeaponInfo(weaponData);
+                weapon.InitWeaponInfo(weaponData, teamDefine.Team);
                 break;
             default:
                 break;

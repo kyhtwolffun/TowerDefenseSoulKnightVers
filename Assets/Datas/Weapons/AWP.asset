@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ffd93e87c8670546a81881bd794800d, type: 3}
-  m_Name: SpreadStaff
+  m_Name: AWP
   m_EditorClassIdentifier: 
-  weaponSprite: {fileID: -5658928591213479476, guid: 50e90bbb39b4f65499f42e747264b08d, type: 3}
-  weaponType: 2
+  weaponSprite: {fileID: -9196951325505323163, guid: cf524edcb61cd004d968b6ff028534ad, type: 3}
+  weaponType: 1
   rangeAttack:
-  - {fileID: 11400000, guid: 06356f9e6418f8249b2da1f88241c904, type: 2}
-  cdr: 1
-  prefab: {fileID: 8384197726332168962, guid: 71a872b74b8d34542858367c9298fdc4, type: 3}
+  - {fileID: 11400000, guid: 729dcfe649e59d94a987e7ff535e3c60, type: 2}
+  cdr: 2
+  prefab: {fileID: 1072926620838766127, guid: 84ec60d6f7422484f9e3dfb9c715b89b, type: 3}

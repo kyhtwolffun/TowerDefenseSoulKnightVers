@@ -15,18 +15,49 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected WeaponType weaponType;
     [SerializeField] protected float cdr;
 
+    [Header("Attack types")]
+    public List<BaseRangeAttack> rangeAttack;
+
+    [Header("Team")]
+    [SerializeField] protected Team team;
+
+    //[Header("TESING")]
+    //[SerializeField] public SpreadAttack changeableRangeAttack;
     #endregion
 
     protected bool isCdrRefreshed = true;
     protected Transform idleTransform;
 
-    public virtual void InitWeaponInfo(WeaponData weaponData)
+    public virtual void InitWeaponInfo(WeaponData weaponData, Team ownerTeam)
     {
         weaponType = weaponData.WeaponType;
         cdr = weaponData.Cdr;
         idleTransform = transform;
+        team = ownerTeam;
+
+        if (weaponData.RangeAttack != null)
+        {
+            for (int i = 0; i < weaponData.RangeAttack.Count; i++)
+            {
+                switch (weaponData.RangeAttack[i].RangeAttackType)
+                {
+                    case RangeAttackType.Straight:
+                        rangeAttack.Add((StraightAttack)weaponData.RangeAttack[i]);
+                        break;
+                    case RangeAttackType.Spread:
+                        rangeAttack.Add((SpreadAttack)weaponData.RangeAttack[i]);
+                        break;
+                    case RangeAttackType.SpreadRandAngle:
+                        rangeAttack.Add((SpreadRandAngleAttack)weaponData.RangeAttack[i]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
+    //TODO: haven't set "team" when attacking melee
     public virtual void Attack()
     {
         if (!isCdrRefreshed)

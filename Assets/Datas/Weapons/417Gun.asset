@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSprite: {fileID: 4045439354945434234, guid: 3d1034bfc5eea2940b1e8207fa094186, type: 3}
   weaponType: 1
+  rangeAttack:
+  - {fileID: 11400000, guid: de963ff9bd69ecf40bcea3d72676170e, type: 2}
   cdr: 0
   prefab: {fileID: 5490474588111918447, guid: e5c9766eb4caae64b84fa2d3002754a2, type: 3}
-  bulletForce: 20
-  numberOfSpreadBullets: 0
-  angleBetweenBullets: 0

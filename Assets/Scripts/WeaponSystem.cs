@@ -5,10 +5,12 @@ using System;
 
 public class WeaponSystem : MonoBehaviour
 {
+    [SerializeField] private bool canStoreTower = false;
+    public bool CanStoreTower => canStoreTower;
     [SerializeField] private int numberOfAvailableWeaponSlots;
     [SerializeField] private TeamDefine teamDefine;
 
-    [Header("TEST")]
+    [Header("For auto attack")]
     [SerializeField] PointingDirection pointingDirection;
     [SerializeField] private bool isAutoAttack = false;
     public bool IsAutoAttack => isAutoAttack;
@@ -20,11 +22,40 @@ public class WeaponSystem : MonoBehaviour
     private int currentWeaponIndex;
 
     private Weapon currentWeapon;
-    public bool GetCurrentWeaponExistence => currentWeapon;
+    public bool IsCurrentWeaponExistence => currentWeapon;
+    private Collectable handyTower;
+    public bool IsCurrentHandyTowerExistence => handyTower;
+
+    //TEST - Callbacks
+    private Action onPlaceTowerCallback;
+    public void RegisterPlaceTowerCallback(Action action)
+    {
+        onPlaceTowerCallback += action;
+    }
 
     public bool isThereFreeSlot()
     {
         return numberOfAvailableWeaponSlots > 0;
+    }
+
+    public void PlaceTower()
+    {
+        if (!handyTower)
+            return;
+        Instantiate(((TowerData)handyTower.ExtractCollectableData()).Prefab, transform.position, Quaternion.identity);
+        Destroy(handyTower.gameObject);
+        onPlaceTowerCallback?.Invoke();
+        onPlaceTowerCallback -= onPlaceTowerCallback;
+    }
+
+    public void GetHandyTower(TowerData tower, Action onDestroyItemCallback)
+    {
+        if (!canStoreTower || handyTower)
+            return;
+        handyTower = Instantiate(tower.HandyTower, transform);
+        handyTower.InitCollectable(tower);
+        handyTower.gameObject.SetActive(false);
+        onDestroyItemCallback?.Invoke();
     }
 
     public void GetWeapon(WeaponData weaponData, Action onDestroyWeaponCallback)

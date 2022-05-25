@@ -12,18 +12,26 @@ public class UISystem : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Image shootAndInteractBtn;
+    [SerializeField] private Image towerIcon;
 
     [Header("Events")]
+    //Interact/Shoot Btn
     [SerializeField] private ActionParamEvent interactableEvent;
     [SerializeField] private NoParamEvent OutRangeInteractableEvent;
+    //TowerIcon
+    [SerializeField] private SpriteParamEvent getTowerEvent;
+    [SerializeField] private NoParamEvent placeTowerEvent;
 
     private Action onInteractableBtnClickCallback;
+    private Action onPlaceTowerCallback;
     private bool shootState = true;
 
     private void Awake()
     {
         interactableEvent.Register(SetupUIInteractable);
         OutRangeInteractableEvent.Register(() => SetUIShootBtn());
+        getTowerEvent.Register(SetupUITowerSlot);
+        placeTowerEvent.Register(() => SetUITowerIcon(false));
     }
 
     private void Update()
@@ -34,6 +42,27 @@ public class UISystem : MonoBehaviour
             OnInteractableBtnClick();
         }
     }
+
+    #region Tower Icon
+    private void SetupUITowerSlot(Sprite sprite)
+    {
+        SetUITowerIcon(true, sprite);
+    }
+
+    private void SetUITowerIcon(bool isEnable, Sprite sprite = null)
+    {
+        if (isEnable)
+        {
+            towerIcon.sprite = sprite;
+            towerIcon.gameObject.SetActive(true);
+        }
+        else
+        {
+            towerIcon.gameObject.SetActive(false);
+        }
+    }
+
+    #endregion
 
     #region Interact/Shoot Btn
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,7 +40,12 @@ public class MainCharacter : MonoBehaviour
         //Input Switch Owned Weapon
         if (Input.GetKeyDown(KeyCode.Space))
             SwitchWeapon();
+
+        //Input place Tower
+        if (Input.GetKeyDown(KeyCode.R))
+            PlaceTower();
     }
+
 
     private void FixedUpdate()
     {
@@ -60,6 +66,11 @@ public class MainCharacter : MonoBehaviour
     private void SwitchWeapon()
     {
         weaponSystem.SwitchWeapon();
+    }
+
+    private void PlaceTower()
+    {
+        weaponSystem.PlaceTower();
     }
 
     private void FlipCharacter()

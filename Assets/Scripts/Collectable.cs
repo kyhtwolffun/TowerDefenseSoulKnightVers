@@ -8,10 +8,10 @@ public class Collectable : MonoBehaviour, IInteractable
     [Header("Components")]
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    private ICollectableData collectableData;
+    [SerializeField] private CollectableDataBase collectableData;
 
     public InteractableType GetInteractableType() => InteractableType.Collectable;
-    public ICollectableData Interact() => collectableData;
+    public CollectableDataBase Interact() => collectableData;
     public void OnCompleteInteract() => DestroyCollectable();
 
     public CollectableType GetCollectableType()
@@ -19,13 +19,13 @@ public class Collectable : MonoBehaviour, IInteractable
         return collectableData.CollectableType;
     }
 
-    public void InitCollectable(ICollectableData _collectableData)
+    public void InitCollectable(CollectableDataBase _collectableData)
     {
         collectableData = _collectableData;
         spriteRenderer.sprite = collectableData.Sprite;
     }
 
-    public ICollectableData ExtractCollectableData()
+    public CollectableDataBase ExtractCollectableData()
     {
         return collectableData;
     }

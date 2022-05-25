@@ -32,7 +32,7 @@ public class SpawnItemSystem : MonoBehaviour
         }
     }
 
-    public void SpawnItem(ICollectableData collectableData, Vector2 spawnPosition)
+    public void SpawnItem(CollectableDataBase collectableData, Vector2 spawnPosition)
     {
         collectable = GetFreeCollectable();
         if (collectable)

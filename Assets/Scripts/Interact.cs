@@ -10,6 +10,8 @@ public class Interact : MonoBehaviour
     [Header("Events - For player only")]
     [SerializeField] private ActionParamEvent interactableEvent;
     [SerializeField] private NoParamEvent OutRangeInteractableEvent;
+    [SerializeField] private SpriteParamEvent getTowerEvent;
+    [SerializeField] private NoParamEvent placeTowerEvent;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -40,6 +42,15 @@ public class Interact : MonoBehaviour
                             }
                             break;
                         case CollectableType.Tower:
+                            if (weaponSystem.CanStoreTower && !weaponSystem.IsCurrentHandyTowerExistence)
+                            {
+                                interactableEvent.Raise(() => weaponSystem.GetHandyTower((TowerData)collectable.Interact(), () =>
+                                {
+                                    collectable.OnCompleteInteract();
+                                    getTowerEvent.Raise(((TowerData)(collectable.Interact())).Sprite);
+                                }));
+                                weaponSystem.RegisterPlaceTowerCallback(() => placeTowerEvent.Raise());
+                            }
                             break;
                         case CollectableType.Item:
                             break;
@@ -53,12 +64,14 @@ public class Interact : MonoBehaviour
                     switch (tower.TowerType)
                     {
                         case TowerType.Attack:
-                            if (!autoInteract && weaponSystem.GetCurrentWeaponExistence)
+                            if (!autoInteract && weaponSystem.IsCurrentWeaponExistence)
                             {
                                 //Update UI + register Place current weapon for interacting tower callback
                                 interactableEvent.Raise(() =>
                                 {
-                                    tower.PlaceWeapon(weaponSystem.GetCurrentWeaponData,() => weaponSystem.DropWeapon());
+                                    WeaponData weaponData = (WeaponData)weaponSystem.GetCurrentWeaponData;
+                                    if (weaponData)
+                                        tower.PlaceWeapon(weaponData, () => weaponSystem.DropWeapon());
                                 });
                             }
                                 break;

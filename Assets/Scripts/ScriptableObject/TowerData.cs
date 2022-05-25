@@ -6,7 +6,7 @@ using System;
 
 [CreateAssetMenu(fileName = "NewTower", menuName = "Data/ Tower")]
 [Serializable]
-public class TowerData : ScriptableObject, ICollectableData
+public class TowerData : CollectableDataBase
 {
     [SerializeField] private Sprite towerSprite;
     [SerializeField] private TowerType towerType;
@@ -15,9 +15,11 @@ public class TowerData : ScriptableObject, ICollectableData
     public int Health => health;
     [SerializeField] private Tower prefab;
     public Tower Prefab => prefab;
+    [SerializeField] private Collectable handyTower;
+    public Collectable HandyTower => handyTower;
 
 
 
-    public CollectableType CollectableType { get => CollectableType.Tower; }
-    public Sprite Sprite { get => towerSprite; }
+    public override CollectableType CollectableType { get => CollectableType.Tower; }
+    public override Sprite Sprite { get => towerSprite; }
 }

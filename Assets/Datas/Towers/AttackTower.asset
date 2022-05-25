@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6594ac1eec75b854f9400ff623c17e6d, type: 3}
+  m_Name: AttackTower
+  m_EditorClassIdentifier: 
+  towerSprite: {fileID: 21300000, guid: c4137b8facf409a4c81198dbf773c982, type: 3}
+  towerType: 0
+  health: 56
+  prefab: {fileID: 6673088306618386784, guid: 5c382914d1103bd4484dc4507a32edf7, type: 3}
+  handyTower: {fileID: 261770877411959518, guid: 341f321e2d8c7d24bb24c57e80369947, type: 3}

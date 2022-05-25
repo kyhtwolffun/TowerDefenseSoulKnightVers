@@ -6,7 +6,7 @@ using System;
 
 [CreateAssetMenu(fileName = "NewWeapon", menuName = "Data/ Weapon")]
 [Serializable]
-public class WeaponData : ScriptableObject, ICollectableData
+public class WeaponData : CollectableDataBase
 {
     [SerializeField] private Sprite weaponSprite;
     [SerializeField] private WeaponType weaponType;
@@ -23,6 +23,6 @@ public class WeaponData : ScriptableObject, ICollectableData
     [SerializeField] private Weapon prefab;
     public Weapon Prefab => prefab;
 
-    public CollectableType CollectableType { get => CollectableType.Weapon; }
-    public Sprite Sprite { get => weaponSprite; }
+    public override CollectableType CollectableType { get => CollectableType.Weapon; }
+    public override Sprite Sprite { get => weaponSprite; }
 }

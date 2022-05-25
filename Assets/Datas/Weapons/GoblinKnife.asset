@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ffd93e87c8670546a81881bd794800d, type: 3}
+  m_Name: GoblinKnife
+  m_EditorClassIdentifier: 
+  weaponSprite: {fileID: 21300000, guid: 92ba0f2e091b56d4d87803d427208cea, type: 3}
+  weaponType: 0
+  rangeAttack: []
+  damage: 1
+  attackRange: 1
+  cdr: 0
+  prefab: {fileID: 2610941582113118757, guid: f9c92fa61bef2474b9c30718966b98f0, type: 3}

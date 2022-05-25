@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private GameObject hitEffect;
+    [SerializeField] protected int damage;
+    public void SetDamage(int _damage)
+    {
+        damage = _damage;
+    }
+    [SerializeField] protected GameObject hitEffect;
     [SerializeField] protected float destroyEffectDelay;
     [SerializeField] private float destroyBulletDelay;
     [SerializeField] private bool rotateEffect;
@@ -13,6 +18,7 @@ public class Bullet : MonoBehaviour
     public void SetTeam(Team ownerTeam)
     {
         team = ownerTeam;
+        gameObject.layer = (int)Mathf.Log(team.TeamBulletLayerMask.value, 2);
     }
 
     private void Start()
@@ -21,19 +27,42 @@ public class Bullet : MonoBehaviour
             DestroyBullet();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        TeamDefine teamDefine = collision.gameObject.GetComponent<TeamDefine>();
-        if (teamDefine)
+        //hit
+        try
         {
-            if (teamDefine.Team.IsOpponent(team))
-            {
-                goto hit;
-            }
-            return;
+            DamageableBase damageable = collision.transform.GetComponent<DamageableBase>();
+            if (damageable)
+                damageable.TakeDamage(damage);
+        }
+        catch (System.Exception)
+        {
+
+            throw;
         }
 
-        hit:
+        GameObject effect = Instantiate(hitEffect, (Vector2)transform.position, Quaternion.identity);
+        if (rotateEffect)
+            effect.transform.SetPositionAndRotation((Vector2)transform.position, transform.rotation);
+        Destroy(effect, destroyEffectDelay);
+        Destroy(gameObject);
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        try
+        {
+            DamageableBase damageable = collision.transform.GetComponent<DamageableBase>();
+            if (damageable)
+                damageable.TakeDamage(damage);
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+
         GameObject effect = Instantiate(hitEffect, (Vector2)transform.position, Quaternion.identity);
         if (rotateEffect)
             effect.transform.SetPositionAndRotation((Vector2)transform.position, transform.rotation);

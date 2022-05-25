@@ -7,7 +7,7 @@ public class Interact : MonoBehaviour
     [SerializeField] private WeaponSystem weaponSystem;
     [SerializeField] private bool autoInteract = false;
 
-    [Header("Events")]
+    [Header("Events - For player only")]
     [SerializeField] private ActionParamEvent interactableEvent;
     [SerializeField] private NoParamEvent OutRangeInteractableEvent;
 
@@ -32,9 +32,11 @@ public class Interact : MonoBehaviour
                             }
                             else
                             {
-                                //Immediately GetWeapon (for monsters) 
-                                weaponSystem.GetWeapon((WeaponData)collectable.Interact(), collectable.OnCompleteInteract);
-                                OutRangeInteractableEvent.Raise();
+                                //Immediately GetWeapon
+                                if (weaponSystem.isThereFreeSlot())
+                                    weaponSystem.GetWeapon((WeaponData)collectable.Interact(), collectable.OnCompleteInteract);
+                                if (!autoInteract)
+                                    OutRangeInteractableEvent.Raise();
                             }
                             break;
                         case CollectableType.Tower:
@@ -56,8 +58,7 @@ public class Interact : MonoBehaviour
                                 //Update UI + register Place current weapon for interacting tower callback
                                 interactableEvent.Raise(() =>
                                 {
-                                    tower.PlaceWeapon(weaponSystem.GetCurrentWeaponData);
-                                    weaponSystem.DropWeapon();
+                                    tower.PlaceWeapon(weaponSystem.GetCurrentWeaponData,() => weaponSystem.DropWeapon());
                                 });
                             }
                                 break;
@@ -81,7 +82,8 @@ public class Interact : MonoBehaviour
         IInteractable interactable = collision.GetComponent<IInteractable>();
         if (interactable != null)
         {
-            OutRangeInteractableEvent.Raise();
+            if (!autoInteract)
+                OutRangeInteractableEvent.Raise();
         }
     }
 }

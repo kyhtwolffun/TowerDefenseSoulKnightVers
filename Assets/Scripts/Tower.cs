@@ -7,23 +7,35 @@ public class Tower : MonoBehaviour, IInteractable
 {
     [Header("Components")]
     [SerializeField] private WeaponSystem weaponSystem;
+    [SerializeField] private Detect detection;
     //[SerializeField] protected Transform weaponPosition;
 
     #region Properties
     [Header("Properties")]
     [SerializeField] protected TowerType towerType;
     public TowerType TowerType => towerType;
-    [SerializeField] private int health;
+    [SerializeField] protected List<WeaponType> availableWeaponTypes;
 
     #endregion
 
     [SerializeField] private float cdrAttacking;
 
 
-    //TEST
-    private void Start()
+    private bool attackMode = false;
+
+
+    private void Update()
     {
-        StartCoroutine(AttackLoop());
+        if (detection.EnemyDetected && !attackMode)
+        {
+            attackMode = true;
+            StartCoroutine(AttackLoop());
+        }
+        else if (!detection.EnemyDetected && attackMode)
+        {
+            attackMode = false;
+            StopAllCoroutines();
+        }
     }
 
     #region interface implementation
@@ -32,15 +44,14 @@ public class Tower : MonoBehaviour, IInteractable
 
     private IEnumerator AttackLoop()
     {
-        Attack();
         yield return new WaitForSeconds(cdrAttacking);
+        Attack();
         StartCoroutine(AttackLoop());
     }
 
     public void InitTowerInfo(TowerData towerData)
     {
         towerType = towerData.TowerType;
-        health = towerData.Health;
     }
 
     public virtual void Attack()
@@ -49,9 +60,17 @@ public class Tower : MonoBehaviour, IInteractable
             weaponSystem.Attack();
     }
 
-    public void PlaceWeapon(WeaponData weaponData)
+    public void PlaceWeapon(WeaponData weaponData, Action onSuccessCallback)
     {
-        weaponSystem.GetWeapon(weaponData, null);
+        for (int i = 0; i < availableWeaponTypes.Count; i++)
+        {
+            if (weaponData.WeaponType == availableWeaponTypes[i])
+            {
+                weaponSystem.GetWeapon(weaponData, null);
+                onSuccessCallback?.Invoke();
+                return;
+            }
+        }
     }
 }
 

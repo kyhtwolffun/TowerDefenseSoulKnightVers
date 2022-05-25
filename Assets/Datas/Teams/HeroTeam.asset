@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OpponentTeams:
   - {fileID: 11400000, guid: fe8cf899c04f5a44b9d5b316700af905, type: 2}
+  teamLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  teamBulletLayerMask:
+    serializedVersion: 2
+    m_Bits: 128

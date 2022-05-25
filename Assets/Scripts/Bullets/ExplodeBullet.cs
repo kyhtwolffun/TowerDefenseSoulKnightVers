@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ExplodeBullet : Bullet
 {
-    [SerializeField] GameObject explodeEffect;
     [SerializeField] float spreadingExplodeDelay;
     [SerializeField] bool spreadingIfHit = false;
 
@@ -15,8 +14,40 @@ public class ExplodeBullet : Bullet
         StartCoroutine(WaitForSpreadingExplode());
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        try
+        {
+            DamageableBase damageable = collision.transform.GetComponent<DamageableBase>();
+            if (damageable)
+                damageable.TakeDamage(damage);
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+
+        if (spreadingIfHit)
+            SpreadingExplode();
+        else
+            Explode();
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        try
+        {
+            DamageableBase damageable = collision.transform.GetComponent<DamageableBase>();
+            if (damageable)
+                damageable.TakeDamage(damage);
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+
         if (spreadingIfHit)
             SpreadingExplode();
         else
@@ -25,7 +56,7 @@ public class ExplodeBullet : Bullet
 
     private void Explode()
     {
-        GameObject effect = Instantiate(explodeEffect, (Vector2)transform.position, Quaternion.identity);
+        GameObject effect = Instantiate(hitEffect, (Vector2)transform.position, Quaternion.identity);
         Destroy(effect, destroyEffectDelay);
         Destroy(gameObject);
     }

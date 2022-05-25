@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
     [Header("Properties")]
     [SerializeField] protected WeaponType weaponType;
     [SerializeField] protected float cdr;
+    [SerializeField] protected int damage;
 
     [Header("Attack types")]
     public List<BaseRangeAttack> rangeAttack;
@@ -33,7 +34,10 @@ public class Weapon : MonoBehaviour
         weaponType = weaponData.WeaponType;
         cdr = weaponData.Cdr;
         idleTransform = transform;
+        damage = weaponData.Damage;
         team = ownerTeam;
+        if (collider2d)
+            gameObject.layer = (int)Mathf.Log(team.TeamBulletLayerMask.value, 2);
 
         if (weaponData.RangeAttack != null)
         {
@@ -91,8 +95,26 @@ public class Weapon : MonoBehaviour
         if (collider2d)
             collider2d.enabled = true;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collider2d)
+        {
+            try
+            {
+                DamageableBase damageable = collision.transform.GetComponent<DamageableBase>();
+                if (damageable)
+                    damageable.TakeDamage(damage);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+    }
 }
 
+[Serializable]
 public enum WeaponType
 {
     Melee,

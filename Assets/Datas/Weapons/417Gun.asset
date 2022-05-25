@@ -16,5 +16,7 @@ MonoBehaviour:
   weaponType: 1
   rangeAttack:
   - {fileID: 11400000, guid: de963ff9bd69ecf40bcea3d72676170e, type: 2}
+  damage: 0
+  attackRange: 8
   cdr: 0
   prefab: {fileID: 5490474588111918447, guid: e5c9766eb4caae64b84fa2d3002754a2, type: 3}

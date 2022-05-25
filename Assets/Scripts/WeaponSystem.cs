@@ -7,7 +7,12 @@ public class WeaponSystem : MonoBehaviour
 {
     [SerializeField] private int numberOfAvailableWeaponSlots;
     [SerializeField] private TeamDefine teamDefine;
-    
+
+    [Header("TEST")]
+    [SerializeField] PointingDirection pointingDirection;
+    [SerializeField] private bool isAutoAttack = false;
+    public bool IsAutoAttack => isAutoAttack;
+
 
     private List<WeaponData> weaponDataList = new List<WeaponData>();
     public WeaponData GetCurrentWeaponData => weaponDataList[currentWeaponIndex];
@@ -99,6 +104,10 @@ public class WeaponSystem : MonoBehaviour
 
     private Weapon EquipWeapon(bool newWeapon, bool removeCurrentWeapon = false)
     {
+        //Update attack range for auto attacking
+        if (IsAutoAttack)
+            pointingDirection.UpdateAttackRange(weaponDataList[currentWeaponIndex].AttackRange);
+
         if (newWeapon)
         {
             if (removeCurrentWeapon)

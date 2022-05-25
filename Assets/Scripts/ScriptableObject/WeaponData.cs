@@ -11,6 +11,11 @@ public class WeaponData : ScriptableObject, ICollectableData
     [SerializeField] private Sprite weaponSprite;
     [SerializeField] private WeaponType weaponType;
     [SerializeField] private List<BaseRangeAttack> rangeAttack;
+    [SerializeField] private int damage;
+    [SerializeField] private float attackRange;
+
+    public float AttackRange => attackRange;
+    public int Damage => damage;
     public List<BaseRangeAttack> RangeAttack => rangeAttack;
     public WeaponType WeaponType => weaponType;
     [SerializeField] private float cdr;

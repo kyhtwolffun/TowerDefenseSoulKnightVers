@@ -13,13 +13,13 @@ TagManager:
   - Water
   - UI
   - Weapon
-  - Bullet
+  - PlayerBullet
   - Player
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Monster
+  - Obstacle
+  - StandingCollider
+  - MonsterBullet
+  - PlayerStandingCollider
   - 
   - 
   - 
@@ -50,6 +50,9 @@ TagManager:
     locked: 0
   - name: MainCharacter
     uniqueID: 2325984979
+    locked: 0
+  - name: Monster
+    uniqueID: 726112995
     locked: 0
   - name: Weapon
     uniqueID: 1431267745

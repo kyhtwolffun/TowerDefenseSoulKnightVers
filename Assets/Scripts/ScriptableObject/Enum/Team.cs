@@ -6,6 +6,10 @@ using UnityEngine;
 public class Team : ScriptableObject
 {
     [SerializeField] private List<Team> OpponentTeams;
+    [SerializeField] private LayerMask teamLayerMask;
+    [SerializeField] private LayerMask teamBulletLayerMask;
+
+    public LayerMask TeamBulletLayerMask => teamBulletLayerMask;
 
     public bool IsOpponent(Team team)
     {

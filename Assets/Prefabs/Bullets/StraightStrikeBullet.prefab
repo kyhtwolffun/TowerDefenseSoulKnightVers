@@ -46,10 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e26801d0072464eb69671dbca604de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 4
   hitEffect: {fileID: 6326545569674918711, guid: dd9602df3299a9c4183ea66f2a7974d5, type: 3}
   destroyEffectDelay: 3
   destroyBulletDelay: 0
   rotateEffect: 1
+  team: {fileID: 0}
 --- !u!212 &2456219031492067408
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,7 +90,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1431267745
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 8532870431742270725, guid: 0cd8788195d944e448bec23d10c91580, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

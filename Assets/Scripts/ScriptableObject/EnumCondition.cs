@@ -8,44 +8,50 @@ public class EnumCondition : ScriptableObject
     [SerializeField] private PriorityCondition<ObjectType> objectType;
     public PriorityCondition<ObjectType> ObjectType => objectType;
     public bool isObjectTypeCondition => objectType.conditionList.Count > 0;
-    public bool isObjectTypeConditionFound(ObjectType _objectType, out int priorityPoint)
+    public bool isObjectTypeConditionFound(ObjectType _objectType, out int mainPriorityPoint, out int subPriorityPoint)
     {
         if (!isObjectTypeCondition)
         {
-            priorityPoint = 0;
+            mainPriorityPoint = 0;
+            subPriorityPoint = 0;
             return true;
         }
         for (int i = 0; i < objectType.conditionList.Count; i++)
         {
             if (_objectType == objectType.conditionList[i])
             {
-                priorityPoint = 1 * objectType.priority + (objectType.conditionList.Count - i);
+                mainPriorityPoint = objectType.priority;
+                subPriorityPoint = objectType.conditionList.Count - i;
                 return true;
             }
         }
-        priorityPoint = 0;
+        mainPriorityPoint = 0;
+        subPriorityPoint = 0;
         return false;
     }
 
     [SerializeField] PriorityCondition<TowerType> towerType;
     public PriorityCondition<TowerType> TowerType => towerType;
     public bool isTowerTypeCondition => towerType.conditionList.Count > 0;
-    public bool isTowerTypeConditionFound(TowerType _towerType, out int priorityPoint)
+    public bool isTowerTypeConditionFound(TowerType _towerType, out int mainPriorityPoint, out int subPriorityPoint)
     {
         if (!isTowerTypeCondition)
         {
-            priorityPoint = 0;
+            mainPriorityPoint = 0;
+            subPriorityPoint = 0;
             return true;
         }
         for (int i = 0; i < towerType.conditionList.Count; i++)
         {
             if (_towerType == towerType.conditionList[i])
             {
-                priorityPoint = 1 * towerType.priority + (towerType.conditionList.Count - i);
+                mainPriorityPoint = towerType.priority;
+                subPriorityPoint = towerType.conditionList.Count - i;
                 return true;
             }
         }
-        priorityPoint = 0;
+        mainPriorityPoint = 0;
+        subPriorityPoint = 0;
         return false;
     }
 }

@@ -8,6 +8,7 @@ public class DetectWithCondition : MonoBehaviour
     private bool enemyDetected = false;
     public bool EnemyDetected => enemyDetected;
     [SerializeField] private EnumCondition condition;
+    [SerializeField] private bool ignoreOthers;
 
     private List<priorityEnemyDetected> enemiesDetected = new List<priorityEnemyDetected>();
     private bool IsEnemiesDetectedContainTransform(Transform transform)
@@ -32,7 +33,6 @@ public class DetectWithCondition : MonoBehaviour
         }
     }
 
-    //Hold
     private void Update()
     {
         RefreshEnemiesDetected();
@@ -45,14 +45,8 @@ public class DetectWithCondition : MonoBehaviour
         {
             enemyDetected = true;
         }
-
-        for (int i = 0; i < enemiesDetected.Count; i++)
-        {
-            Debug.Log(gameObject.ToString() + "with enemiesDetected: " + "obj name: " + enemiesDetected[i].transform.gameObject.ToString() + "_priorityPoint: " + enemiesDetected[i].priorityPoint);
-        }
     }
 
-    //Hold
     private void RefreshEnemiesDetected()
     {
         if (enemiesDetected.Count <= 0)
@@ -77,16 +71,30 @@ public class DetectWithCondition : MonoBehaviour
             priorityEnemyDetected closestEnemy = enemiesDetected[0];
             for (int i = 1; i < enemiesDetected.Count; i++)
             {
-                if (enemiesDetected[i].priorityPoint > closestEnemy.priorityPoint)
+                if (enemiesDetected[i].mainPriorityPoint > closestEnemy.mainPriorityPoint)
                 {
                     closestEnemy = enemiesDetected[i];
                     continue;
                 }
-                else if (enemiesDetected[i].priorityPoint == closestEnemy.priorityPoint)
+                else if (enemiesDetected[i].mainPriorityPoint == closestEnemy.mainPriorityPoint)
                 {
-                    if (Vector2.Distance(transform.position, enemiesDetected[i].transform.position) < Vector2.Distance(transform.position, closestEnemy.transform.position))
+                    if (enemiesDetected[i].subPriorityPoint > closestEnemy.subPriorityPoint)
                     {
                         closestEnemy = enemiesDetected[i];
+                        continue;
+                    }
+                    else if (enemiesDetected[i].subPriorityPoint == closestEnemy.subPriorityPoint)
+                    {
+                        if (enemiesDetected[i].referPoint > closestEnemy.referPoint)
+                        {
+                            closestEnemy = enemiesDetected[i];
+                            continue;
+                        }
+                        else if (enemiesDetected[i].referPoint == closestEnemy.referPoint
+                            && Vector2.Distance(transform.position, enemiesDetected[i].transform.position) < Vector2.Distance(transform.position, closestEnemy.transform.position))
+                        {
+                            closestEnemy = enemiesDetected[i];
+                        }
                     }
                 }
             }
@@ -101,22 +109,38 @@ public class DetectWithCondition : MonoBehaviour
         if (teamDefine)
         {
             priorityEnemyDetected enemy = new priorityEnemyDetected();
-            int priorityPoint;
-            if (ownerTeamDefine.Team.IsOpponent(teamDefine.Team) && condition.isObjectTypeConditionFound(teamDefine.ObjectType, out priorityPoint))
+
+            if (ownerTeamDefine.Team.IsOpponent(teamDefine.Team))
             {
-                enemy.priorityPoint += priorityPoint;
                 enemy.transform = collision.transform;
+
+                if (condition.isObjectTypeConditionFound(teamDefine.ObjectType, out int mainPriorityPoint, out int subPriorityPoint))
+                {
+                    if (enemy.mainPriorityPoint < mainPriorityPoint)
+                    {
+                        enemy.mainPriorityPoint = mainPriorityPoint;
+                        enemy.subPriorityPoint = subPriorityPoint;
+                    }
+                    enemy.referPoint++;
+                }
+                
                 if (condition.isTowerTypeCondition)
                 {
                     Tower tower = collision.GetComponent<Tower>();
-                    if (tower && condition.isTowerTypeConditionFound(tower.TowerType, out priorityPoint))
+                    if (tower && condition.isTowerTypeConditionFound(tower.TowerType, out int _mainPriorityPoint, out int _subPriorityPoint))
                     {
-                        enemy.priorityPoint += priorityPoint;
-                        //goto detected;
+                        if (enemy.mainPriorityPoint < _mainPriorityPoint)
+                        {
+                            enemy.mainPriorityPoint = _mainPriorityPoint;
+                            enemy.subPriorityPoint = _subPriorityPoint;
+                        }
+                        enemy.referPoint++;
                     }
-                    //return;
                 }
-                //detected:
+
+                if (ignoreOthers && enemy.mainPriorityPoint == 0)
+                    return;
+
                 enemyDetected = true;
                 if (!IsEnemiesDetectedContainTransform(collision.transform))
                     enemiesDetected.Add(enemy);
@@ -130,19 +154,8 @@ public class DetectWithCondition : MonoBehaviour
         TeamDefine teamDefine = collision.GetComponent<TeamDefine>();
         if (teamDefine)
         {
-            int priorityPoint;
-            if (ownerTeamDefine.Team.IsOpponent(teamDefine.Team) && condition.isObjectTypeConditionFound(teamDefine.ObjectType, out priorityPoint))
+            if (ownerTeamDefine.Team.IsOpponent(teamDefine.Team))
             {
-                if (condition.isTowerTypeCondition)
-                {
-                    Tower tower = collision.GetComponent<Tower>();
-                    if (tower && condition.isTowerTypeConditionFound(tower.TowerType, out priorityPoint))
-                    {
-                        //goto found;
-                    }
-                    //return;
-                }
-                //found:
                 if (IsEnemiesDetectedContainTransform(collision.transform))
                     RemoveTransformFromEnemiesDetected(collision.transform);
                 return;
@@ -153,10 +166,14 @@ public class DetectWithCondition : MonoBehaviour
 
 public class priorityEnemyDetected
 {
-    public int priorityPoint;
+    public int mainPriorityPoint;
+    public int subPriorityPoint;
+    public int referPoint;
     public Transform transform;
     public priorityEnemyDetected()
     {
-        priorityPoint = 0;
+        mainPriorityPoint = 0;
+        subPriorityPoint = 0;
+        referPoint = 0;
     }
 }

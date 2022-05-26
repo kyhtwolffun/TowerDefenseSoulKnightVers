@@ -18,4 +18,4 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b75c606900cfe6342b09fb1aff56f5b9, type: 2}
   towerType:
     priority: 1
-    conditionList: 
+    conditionList: 03000000

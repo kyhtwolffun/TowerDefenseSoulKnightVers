@@ -723,6 +723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerTeamDefine: {fileID: 241035988077914941}
   condition: {fileID: 11400000, guid: d22ef4109eb81734487c15f3552121ea, type: 2}
+  ignoreOthers: 0
 --- !u!1 &8344869550385773631
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerTeamDefine: {fileID: 241035988077914941}
   condition: {fileID: 11400000, guid: fdef0411e7bb4134bb07ad126376f738, type: 2}
+  ignoreOthers: 1
 --- !u!1 &8402049437173139312
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,11 +38,13 @@ public class WeaponSystem : MonoBehaviour
         return numberOfAvailableWeaponSlots > 0;
     }
 
+    #region HandyBuilding
     public void PlaceTower()
     {
-        if (!handyTower)
+        if (!handyTower || !PlaceableRange.instance.IsAbleToPlaceBuilding(transform.parent.gameObject))
             return;
-        Instantiate(((TowerData)handyTower.ExtractCollectableData()).Prefab, transform.position, Quaternion.identity);
+        Tower tower = Instantiate(((TowerData)handyTower.ExtractCollectableData()).Prefab, transform.position, Quaternion.identity);
+        tower.InitTowerInfo((TowerData)handyTower.ExtractCollectableData());
         Destroy(handyTower.gameObject);
         onPlaceTowerCallback?.Invoke();
         onPlaceTowerCallback -= onPlaceTowerCallback;
@@ -52,11 +54,12 @@ public class WeaponSystem : MonoBehaviour
     {
         if (!canStoreTower || handyTower)
             return;
-        handyTower = Instantiate(tower.HandyTower, transform);
+        handyTower = Instantiate(tower.HandyTowerPrefab, transform);
         handyTower.InitCollectable(tower);
         handyTower.gameObject.SetActive(false);
         onDestroyItemCallback?.Invoke();
     }
+    #endregion
 
     public void GetWeapon(WeaponData weaponData, Action onDestroyWeaponCallback)
     {

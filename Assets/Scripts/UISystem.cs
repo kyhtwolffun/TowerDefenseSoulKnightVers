@@ -23,7 +23,6 @@ public class UISystem : MonoBehaviour
     [SerializeField] private NoParamEvent placeTowerEvent;
 
     private Action onInteractableBtnClickCallback;
-    private Action onPlaceTowerCallback;
     private bool shootState = true;
 
     private void Awake()

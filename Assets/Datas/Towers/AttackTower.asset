@@ -16,4 +16,5 @@ MonoBehaviour:
   towerType: 0
   health: 56
   prefab: {fileID: 6673088306618386784, guid: 5c382914d1103bd4484dc4507a32edf7, type: 3}
-  handyTower: {fileID: 261770877411959518, guid: 341f321e2d8c7d24bb24c57e80369947, type: 3}
+  handyTowerPrefab: {fileID: 261770877411959518, guid: 341f321e2d8c7d24bb24c57e80369947, type: 3}
+  defaultWeapon: {fileID: 11400000, guid: 076556bcc140e5647830badea9776c03, type: 2}

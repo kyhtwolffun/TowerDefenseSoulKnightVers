@@ -15,8 +15,10 @@ public class TowerData : CollectableDataBase
     public int Health => health;
     [SerializeField] private Tower prefab;
     public Tower Prefab => prefab;
-    [SerializeField] private Collectable handyTower;
-    public Collectable HandyTower => handyTower;
+    [SerializeField] private Collectable handyTowerPrefab;
+    public Collectable HandyTowerPrefab => handyTowerPrefab;
+    [SerializeField] private WeaponData defaultWeapon;
+    public WeaponData DefaultWeapon => defaultWeapon;
 
 
 

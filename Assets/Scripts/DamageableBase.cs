@@ -19,6 +19,12 @@ public class DamageableBase : MonoBehaviour, IDamageable
         //healthBar.SetHealth(health);
     }
 
+    public void InitHealth(int _health)
+    {
+        healthBar.SetMaxHealth(_health);
+        health = _health;
+    }
+
     public void TakeDamage(int damage)
     {
         if (!isDamageable)
@@ -42,4 +48,5 @@ public class DamageableBase : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(takeDmgCdr);
         isDamageable = true;
     }
+
 }

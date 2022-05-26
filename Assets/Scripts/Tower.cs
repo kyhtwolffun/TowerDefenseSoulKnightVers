@@ -26,15 +26,18 @@ public class Tower : MonoBehaviour, IInteractable
 
     private void Update()
     {
-        if (detection.EnemyDetected && !attackMode)
+        if (weaponSystem && detection)
         {
-            attackMode = true;
-            StartCoroutine(AttackLoop());
-        }
-        else if (!detection.EnemyDetected && attackMode)
-        {
-            attackMode = false;
-            StopAllCoroutines();
+            if (detection.EnemyDetected && !attackMode)
+            {
+                attackMode = true;
+                StartCoroutine(AttackLoop());
+            }
+            else if (!detection.EnemyDetected && attackMode)
+            {
+                attackMode = false;
+                StopAllCoroutines();
+            }
         }
     }
 
@@ -52,6 +55,12 @@ public class Tower : MonoBehaviour, IInteractable
     public void InitTowerInfo(TowerData towerData)
     {
         towerType = towerData.TowerType;
+        weaponSystem.GetWeapon(towerData.DefaultWeapon, null);
+        //DamageableBase body = transform.GetComponentInChildren<DamageableBase>();
+        //if (body)
+        //{
+        //    body.InitHealth(towerData.Health);
+        //}
     }
 
     public virtual void Attack()
@@ -78,5 +87,7 @@ public enum TowerType
 {
     Attack,
     Shield,
-    Buff
+    Buff,
+    Decoy,
+    MainTower
 }

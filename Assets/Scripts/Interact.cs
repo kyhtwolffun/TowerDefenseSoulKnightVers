@@ -69,15 +69,17 @@ public class Interact : MonoBehaviour
                                 //Update UI + register Place current weapon for interacting tower callback
                                 interactableEvent.Raise(() =>
                                 {
-                                    WeaponData weaponData = (WeaponData)weaponSystem.GetCurrentWeaponData;
+                                    WeaponData weaponData = weaponSystem.GetCurrentWeaponData;
                                     if (weaponData)
                                         tower.PlaceWeapon(weaponData, () => weaponSystem.DropWeapon());
                                 });
                             }
-                                break;
+                            break;
                         case TowerType.Shield:
                             break;
                         case TowerType.Buff:
+                            break;
+                        case TowerType.Decoy:
                             break;
                         default:
                             break;

@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Detect : MonoBehaviour
 {
-    [SerializeField] private TeamDefine ownerTeamDefine;
-    private bool enemyDetected = false;
+    [SerializeField] protected TeamDefine ownerTeamDefine;
+    protected bool enemyDetected = false;
     public bool EnemyDetected => enemyDetected;
 
-    private List<Transform> enemiesDetected = new List<Transform>();
+    protected List<Transform> enemiesDetected = new List<Transform>();
 
-    private void Update()
+    //Hold
+    protected virtual void Update()
     {
         RefreshEnemiesDetected();
 
@@ -24,7 +25,8 @@ public class Detect : MonoBehaviour
         }
     }
 
-    private void RefreshEnemiesDetected()
+    //Hold
+    protected virtual void RefreshEnemiesDetected()
     {
         if (enemiesDetected.Count <= 0)
             return;
@@ -39,7 +41,8 @@ public class Detect : MonoBehaviour
         }
     }
 
-    public Transform GetClosestEnemy()
+    //Done  Inherit-Update
+    public virtual Transform GetClosestEnemy()
     {
         if (enemiesDetected.Count >= 1 && !enemiesDetected[0].gameObject.activeInHierarchy)
         {
@@ -77,7 +80,8 @@ public class Detect : MonoBehaviour
         return null;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //Done  Inherit-Update
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         TeamDefine teamDefine = collision.GetComponent<TeamDefine>();
         if (teamDefine)
@@ -93,7 +97,8 @@ public class Detect : MonoBehaviour
         //enemyDetected = false;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    //Done  Inherit-Update
+    protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         TeamDefine teamDefine = collision.GetComponent<TeamDefine>();
         if (teamDefine)

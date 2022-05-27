@@ -22,7 +22,8 @@ public class DamageableBase : MonoBehaviour, IDamageable
     public void InitHealth(int _health)
     {
         healthBar.SetMaxHealth(_health);
-        health = _health;
+        maxHealth = _health;
+        health = maxHealth;
     }
 
     public void TakeDamage(int damage)

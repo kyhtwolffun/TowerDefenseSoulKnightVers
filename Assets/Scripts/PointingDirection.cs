@@ -33,6 +33,8 @@ public class PointingDirection : MonoBehaviour
         if (isMousePointing)
         {
             lookDir = mousePos - (Vector2)transform.position;
+            angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+            transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, angle);
         }
         else
         {
@@ -41,10 +43,12 @@ public class PointingDirection : MonoBehaviour
                 return;
             if (detection && detection.EnemyDetected)
                 target = detection.GetClosestEnemy();
-            lookDir = (Vector2)target.position - (Vector2)transform.position;
+            if (target)
+                lookDir = (Vector2)target.position - (Vector2)transform.position;
+
+            angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+            transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, angle);
         }
-        angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg -90f;
-        transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, angle);
     }
 
     public void UpdateAttackRange(float _range)
@@ -65,7 +69,7 @@ public class PointingDirection : MonoBehaviour
             if (raycastHits[i])
             {
                 //Debug.Log("Hit " + raycastHits[i].collider.name);
-                if (raycastHits[i].transform.gameObject == target.gameObject)
+                if (target && raycastHits[i].transform.gameObject == target.gameObject)
                 {
                     //Debug.Log("Hit target");
                     return true;

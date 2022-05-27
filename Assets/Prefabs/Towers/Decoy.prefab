@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2255090775912838868}
   - component: {fileID: 2255090775912838870}
   - component: {fileID: 2255090775912838869}
+  - component: {fileID: 4116638433977517484}
   m_Layer: 0
   m_Name: Decoy
   m_TagString: Untagged
@@ -116,6 +117,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: {fileID: 11400000, guid: 8b5c917ba6fbfe04a81078721ef6bc74, type: 2}
   objectType: {fileID: 11400000, guid: 8c11d4c0ee3bf9045bb989986507abba, type: 2}
+--- !u!70 &4116638433977517484
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2255090775912838866}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.030291438, y: 0.058058262}
+  m_Size: {x: 0.59611726, y: 0.83339787}
+  m_Direction: 0
 --- !u!1001 &2255090775816003983
 PrefabInstance:
   m_ObjectHideFlags: 0

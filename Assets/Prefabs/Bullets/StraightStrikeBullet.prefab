@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e26801d0072464eb69671dbca604de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 4
+  damage: 8
   hitEffect: {fileID: 6326545569674918711, guid: dd9602df3299a9c4183ea66f2a7974d5, type: 3}
   destroyEffectDelay: 3
   destroyBulletDelay: 0

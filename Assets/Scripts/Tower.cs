@@ -55,7 +55,8 @@ public class Tower : MonoBehaviour, IInteractable
     public void InitTowerInfo(TowerData towerData)
     {
         towerType = towerData.TowerType;
-        weaponSystem.GetWeapon(towerData.DefaultWeapon, null);
+        if (towerData.DefaultWeapon)
+            weaponSystem.GetWeapon(towerData.DefaultWeapon, null);
         //DamageableBase body = transform.GetComponentInChildren<DamageableBase>();
         //if (body)
         //{

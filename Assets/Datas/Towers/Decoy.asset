@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6594ac1eec75b854f9400ff623c17e6d, type: 3}
-  m_Name: AttackTower
+  m_Name: Decoy
   m_EditorClassIdentifier: 
-  towerSprite: {fileID: 21300000, guid: c4137b8facf409a4c81198dbf773c982, type: 3}
-  towerType: 0
+  towerSprite: {fileID: -2081660615801977811, guid: 50e362b3bc2f4e14c9fca49621110db5, type: 3}
+  towerType: 3
   health: 0
-  prefab: {fileID: 6673088306618386784, guid: 5c382914d1103bd4484dc4507a32edf7, type: 3}
+  prefab: {fileID: 2255090775912838870, guid: ca49702f60289a542ad7609bddcd0521, type: 3}
   handyTowerPrefab: {fileID: 261770877411959518, guid: 341f321e2d8c7d24bb24c57e80369947, type: 3}
-  defaultWeapon: {fileID: 11400000, guid: 076556bcc140e5647830badea9776c03, type: 2}
+  defaultWeapon: {fileID: 0}

@@ -173,6 +173,8 @@ MonoBehaviour:
   pointingDirection: {fileID: 5822452418557756728}
   minimunAttackDelay: 0.3
   attackDelayNoise: 1
+  health: {fileID: 920458355752735389}
+  aiPath: {fileID: 241035988077914938}
 --- !u!114 &241035988077914937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,8 +618,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSystem: {fileID: 5822452418557756725}
   autoInteract: 1
-  interactableEvent: {fileID: 11400000, guid: 9ebbbf12a312a0e418201fba6e8da5fa, type: 2}
-  OutRangeInteractableEvent: {fileID: 11400000, guid: d0aa755162b9c734abe9aa382c35a592, type: 2}
+  interactableEvent: {fileID: 0}
+  OutRangeInteractableEvent: {fileID: 0}
   getTowerEvent: {fileID: 0}
   placeTowerEvent: {fileID: 0}
 --- !u!61 &5822452418557756730
